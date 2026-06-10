@@ -3,7 +3,11 @@ import { useState } from "react";
 import Logo from "./Logo";
 import "./styles/Register.css";
 
-const Register = () => {
+// Destructure the prop.
+const Register = ({ handleRegistration }) => {
+  // The inputs are controlled via a single piece of state: an object
+  // object called `data`. This lets us avoid writing separate change
+  // handlers for each input.
   const [data, setData] = useState({
     username: "",
     email: "",
@@ -11,6 +15,9 @@ const Register = () => {
     confirmPassword: "",
   });
 
+  // This function fires whenever an input is changed, and it updates
+  // the value of the changed input. Note that the keys of this
+  // object match the name attributes of the corresponding inputs.
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData((prevData) => ({
@@ -19,11 +26,20 @@ const Register = () => {
     }));
   };
 
+  // Declare a submission handler function. This function just needs
+  // to prevent the default browser behavior, and call
+  // handleRegistration, passing it the data from the form
+  // submission.
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleRegistration(data);
+  };
+
   return (
     <div className="register">
       <Logo title={"CryptoDucks"} />
       <p className="register__welcome">Please register.</p>
-      <form className="register__form">
+      <form className="register__form" onSubmit={handleSubmit}>
         <label htmlFor="username">Username:</label>
         <input
           id="username"
