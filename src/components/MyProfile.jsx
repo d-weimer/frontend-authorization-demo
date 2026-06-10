@@ -2,15 +2,12 @@ import NavBar from "./NavBar";
 import "./styles/MyProfile.css";
 
 // Destructure setIsLoggedIn alongside userData from the props object
-function MyProfile({
-  userData = { username: "Username here", email: "Email here" },
-  setIsLoggedIn,
-}) {
-  const { username, email } = userData;
+function MyProfile({ userData }) {
+  const { username, email } = userData || {};
+
   return (
     <>
-      {/* Pass the prop directly into the NavBar component */}
-      <NavBar setIsLoggedIn={setIsLoggedIn} />
+      <NavBar />
       <div className="my-profile">
         <div className="my-profile__container">
           <div className="my-profile__header">
