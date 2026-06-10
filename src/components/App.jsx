@@ -100,7 +100,8 @@ function App() {
         path="/ducks"
         element={
           <ProtectedRoute isLoggedIn={isLoggedIn}>
-            <Ducks />
+            {/* Pass setIsLoggedIn to Ducks so its nested NavBar can use it */}
+            <Ducks setIsLoggedIn={setIsLoggedIn} />
           </ProtectedRoute>
         }
       />
@@ -108,7 +109,8 @@ function App() {
         path="/my-profile"
         element={
           <ProtectedRoute isLoggedIn={isLoggedIn}>
-            <MyProfile userData={userData} />
+            {/* Pass setIsLoggedIn alongside userData to MyProfile */}
+            <MyProfile userData={userData} setIsLoggedIn={setIsLoggedIn} />
           </ProtectedRoute>
         }
       />
